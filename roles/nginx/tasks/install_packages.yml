@@ -1,0 +1,16 @@
+- name: Check if EPEL repo is already configured.
+  stat: path={{ epel_repofile_path }}
+  register: epel_repofile_result
+ 
+- name: Install EPEL repo
+  yum:
+    name: "{{ epel_repo_url }}"
+    state: present
+  register: result
+  when: not epel_repofile_result.stat.exists
+ 
+- name: Install Nginx Packages
+  yum:
+    name: nginx
+    state: installed
+    update_cache: yes

@@ -1,0 +1,16 @@
+---
+# vars file for ngnix
+epel_repo_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
+epel_repo_gpg_key_url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7"
+epel_repofile_path: "/etc/yum.repos.d/epel.repo"
+worker_processes: 4
+multi_accept: "on"
+worker_connections: 512 
+access_log: "/var/log/nginx/access.log"
+error_log: "/var/log/nginx/error.log"
+server_tokens: "off"
+sendfile: "on"
+tcp_nodelay: "on"
+tcp_nopush: "on"
+keepalive_timeout: 65
+gzip: "on"

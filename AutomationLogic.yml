@@ -1,0 +1,5 @@
+- name: Prepare NGINX
+  hosts: all
+  sudo: yes
+  roles:
+        - { role: nginx  } 
