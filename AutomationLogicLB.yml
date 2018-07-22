@@ -1,0 +1,7 @@
+- name: setup LB and configuration
+  hosts: all 
+  gather_facts: False
+  become: yes
+  roles:
+        - {role: nginx, sudo: yes, tags: ['instal_nginx']  }
+        - {role: lb, sudo: yes }

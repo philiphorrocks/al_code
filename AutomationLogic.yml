@@ -1,6 +1,8 @@
-- name: Prepare NGINX and PHP installation
-  hosts: all
+- name: prepare nginx and PHP installation
+  hosts: all 
+  gather_facts: False
   become: yes
   roles:
         -  nginx
-        -  php 
+        -  php
+

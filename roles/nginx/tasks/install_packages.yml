@@ -8,3 +8,5 @@
    state: present 
    update_cache: yes
   when: not st.stat.exists
+  tags:
+      - install_nginx 
