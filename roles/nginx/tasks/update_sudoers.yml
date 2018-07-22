@@ -1,0 +1,16 @@
+- name: update sudoers file for vagrant user 
+  lineinfile:
+   path: /etc/sudoers
+   state: present
+   regexp: '^vagrant\s'
+   insertafter: '^# User privilege specification'
+   line: 'vagrant ALL=(ALL) NOPASSWD: ALL'
+   validate: '/usr/sbin/visudo -cf %s'
+
+- name: update sudoers file for admin group
+  lineinfile:
+   path: /etc/sudoers
+   state: present
+   regexp: '^%ADMIN ALL='
+   line: '%ADMIN ALL=(ALL) ALL'
+   validate: '/usr/sbin/visudo -cf %s'

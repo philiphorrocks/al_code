@@ -1,5 +1,6 @@
-- name: Prepare NGINX
+- name: Prepare NGINX and PHP installation
   hosts: all
-  sudo: yes
+  become: yes
   roles:
-        - { role: nginx  } 
+        -  nginx
+        -  php 
