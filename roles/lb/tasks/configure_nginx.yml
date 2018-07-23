@@ -1,8 +1,0 @@
----
-- name: push nginx lb config
-  template: src=nginx_lb.j2 dest="/etc/nginx/conf.d/load-balancer.conf"
-  notify: restart nginx
-
-- name: push nginx config
-  template: src=nginx.j2 dest="/etc/nginx/nginx.conf"
-  notify: restart nginx

@@ -1,7 +1,12 @@
+---
+
+# Check to see if there is already a ngix config installed. Register the result
+
 - name: check if nginx config exists 
   stat: path=/etc/nginx/nginx.conf
   register: st
 
+# Install the base nginx binary for thw webserver. (Only if the nginix.conf is not present)
 - name: install nginx package 
   apt:
    name: nginx

@@ -1,18 +1,58 @@
-server {  
-    listen  80;
-    root /var/www/html;
-    index index.php;
+user www-data;
 
+worker_processes  {{ worker_processes }};
+
+pid /var/run/nginx.pid;
+
+events {
+    worker_connections  {{ worker_connections }};
+    multi_accept {{ multi_accept }};
+}
+
+
+http {
+    include /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    access_log {{ access_log }};
+    error_log {{ error_log }};
+    server_tokens {{ server_tokens }};
+    sendfile {{ sendfile }};
+    tcp_nodelay {{ tcp_nodelay }};
+    tcp_nopush {{ tcp_nopush }};
+    keepalive_timeout  {{ keepalive_timeout }};
+    gzip {{ gzip }};
+    include /etc/nginx/conf.d/http/*.conf;
+    include /etc/nginx/sites-enabled/*;
+
+  server {
+    listen       80;
+    root /usr/share/nginx/html;
+    server_name _;
+    index index.php index.html index.htm;
+    
     location / {
-        try_files $uri $uri/ /index.php?$query_string;
+                # First attempt to serve request as file, then
+                # as directory, then fall back to index.html
+                try_files $uri $uri/ /index.html;
     }
+    location /doc {
+                root /usr/share;
+                autoindex on;
+                allow 127.0.0.1;
+                deny all;
+    }
+    location /images {
+                root /usr/share;
+                autoindex off;
+    }  
 
     location ~ \.php$ {
-        set_real_ip_from 192.168.56.103;
+        try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass 127.0.0.1:9010;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
+        include fastcgi_params;    
+}
+}
 }

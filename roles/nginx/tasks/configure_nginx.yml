@@ -1,3 +1,8 @@
+---
+
+# Copy the nginx config and restart nginx
+
 - name: push nginx config
   template: src=nginx.j2 dest="/etc/nginx/nginx.conf"
+  register: ng1
   notify: restart nginx

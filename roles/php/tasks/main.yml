@@ -1,5 +1,9 @@
 ---
+
 # tasks file for php
+
+# Instal all PHP5 packages
+
 - name: install packages
   apt: name={{ item }} update_cache=yes state=latest
   with_items:
@@ -14,20 +18,28 @@
       - php5-sqlite
       - sqlite3
 
+# Make sure value is present in the php.ini file (required)
+
 - name: ensure php5-fpm cgi.fix_pathinfo=0
   lineinfile: dest=/etc/php5/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
   notify:
      - restart php5-fpm
      - restart nginx
 
+# Eanble the PhP mcrypt module
+
 - name: enable php5 mcrypt module
   shell: php5enmod mcrypt
   args:
      creates: /etc/php5/cli/conf.d/20-mcrypt.ini
 
+# Copy the correct config to the nginx server
+
 - name: copy a updated version of php default sites config 
   template: src=default.j2 dest="/etc/nginx/sites-available/default"
   notify: restart php5-fpm 
+
+# Clone my test PHP file (helloworld.php) into the nginx root
 
 - name: Clone git repository and deploy php code
   git: >
@@ -35,8 +47,9 @@
     repo=https://github.com/philiphorrocks/al_test.git
     update=no
   become: yes
-  sudo_user: www-data
+  register: cd1
 
+# Test that the webserver is running on port 80
 
 - name: confirm URL is available (helloworld.php) 
   uri:
@@ -47,3 +60,5 @@
   until: result | succeeded
   retries: 8
   delay: 20
+  tags:
+     - test_url

@@ -1,8 +1,13 @@
 ---
 # handlers file for php
 
+# Restart the php5-fpm service 
+
 - name: restart php5-fpm
   service: name=php5-fpm state=restarted
 
+# Restart the nginx service only when the GIT code has been updated
+
 - name: restart nginx
   service: name=nginx state=restarted
+  when: cd1.changed

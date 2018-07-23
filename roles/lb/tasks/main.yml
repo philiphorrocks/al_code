@@ -1,4 +1,17 @@
 ---
 # tasks file for lb
 
-- include: configure_nginx.yml 
+# Copy the nginx LB config to the nginx virtual host
+
+- name: push nginx lb config
+  template: src=nginx_lb.j2 dest="/etc/nginx/sites-enabled/default"
+  register: resLB1 
+  notify: restart nginx
+
+# Copy the nginx config to the nginx virtual host
+
+- name: push nginx config
+  template: src=nginx.j2 dest="/etc/nginx/nginx.conf"
+  register: resLB2 
+  notify: restart nginx
+

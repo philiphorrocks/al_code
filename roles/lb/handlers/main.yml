@@ -3,3 +3,4 @@
 
 - name: restart nginx
   service: name=nginx state=restarted
+  when: resLB1.changed or resLB2.changed 

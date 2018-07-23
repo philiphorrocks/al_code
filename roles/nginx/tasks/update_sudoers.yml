@@ -1,3 +1,7 @@
+---
+
+# Add vagrant user to the suoers file and just about the line "User privilege specification". Allow vagrant user to sudo without b# eing prompted for password
+
 - name: update sudoers file for vagrant user 
   lineinfile:
    path: /etc/sudoers
@@ -6,6 +10,8 @@
    insertafter: '^# User privilege specification'
    line: 'vagrant ALL=(ALL) NOPASSWD: ALL'
    validate: '/usr/sbin/visudo -cf %s'
+
+# Update admin group in sudoers file and enforce users in this group to add password
 
 - name: update sudoers file for admin group
   lineinfile:
