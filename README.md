@@ -6,11 +6,11 @@ This playbook configures the following:
 	- Install nginx packages and config files on 3 hosts
         - Configure nginx on 2 Web hosts as an application server
         - Configure nginx on 1 host as Loadbalacer
-        - Configure PHP on 2 web hosts
-        - Pull php helloworld application for GIT repo
+        - Configure PHP application on 2 web hosts
+        - Pull php helloworld application from GIT repo (https://github.com/philiphorrocks/al_test.git)
         - Update sudo rules for vagrant user and admin group
-        - Configure Load blancer to round robin between 2 web hosts 
-
+        - Configure Load blancer (http://192.168.56.103/al/helloworld.php)  round robin between 2 web hosts 
+        - Install SQLite DB and schema (Used by PHP application to display helloworld message)
 
 Requirements
 ------------
@@ -31,7 +31,16 @@ Clone files form Git repository and run vagrant command below
 
        - git clone
        - vagrant up --provision 
+       - http://192.168.56.103/al/helloworld.php (This is the LB address for testing)
 
+This will use the Vagrantfile to build 3 Ubuntu (puppetlabs/ubuntu-14.04-64-nocm) hosts (1 x LB and 2 x Web)
+
+       - web1:http://192.168.56.101 
+       - web2:http://192.168.56.102
+       - lb1: http://192.168.56.103
+
+
+Ansible will install nginx on all 3 hosts. 2 host will be configured a a web server and the remaining host will be configured as a load balancer. The 2 web hosts will also have PHP and SQLite installed. The PHP application will connect directly to the backed database which will provide the message string "helloworld". 
 
 
 License
