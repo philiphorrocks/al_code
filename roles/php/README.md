@@ -1,38 +1,48 @@
-Role Name
+PHP
 =========
 
-A brief description of the role goes here.
+This role deploys the php packages and mycypt binary to 2 Ubuntu Web hosts. This is a standard packaged via an apt installation.
+
+The following packages are install:
+
+      - git
+      - mcrypt
+      - php5-cli
+      - php5-curl
+      - php5-fpm
+      - php5-intl
+      - php5-json
+      - php5-mcrypt
+      - php5-sqlite
+      - sqlite3
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+No pre-reqs for this install. This is a standard apt install
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+There are no variables ae held locally in the role and include the following:
 
-Dependencies
-------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This role is triggered by calling the playbook AytomationLogic.yml. This playbook is automatically called via the Vagranfile provisioner 
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+- name: prepare nginx and PHP installation
+  hosts: all 
+  gather_facts: False
+  become: yes
+  roles:
+        -  nginx
+        -  php
+
 
 License
 -------
 
 BSD
 
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

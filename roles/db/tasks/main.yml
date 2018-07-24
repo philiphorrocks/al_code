@@ -1,0 +1,14 @@
+---
+# tasks file for db
+
+- name: create sqlite directory
+  file: 
+   path={{ sqlite_dir }}
+   state=directory
+  become: yes
+
+- name: copy SQL db to host 
+  copy:
+   src: ../../../altest.db
+   dest: /home/sqlite
+  become: yes
