@@ -41,7 +41,7 @@ This will use the Vagrantfile to build 3 Ubuntu (puppetlabs/ubuntu-14.04-64-nocm
        - lb1: http://192.168.56.103
 
 
-Ansible will install nginx on all 3 hosts. 2 host will be configured a a web server and the remaining host will be configured as a load balancer. The 2 web hosts will also have PHP and SQLite installed. The PHP application will connect directly to the backed database which will provide the message string "helloworld". 
+Ansible will install nginx on all 3 hosts. 2 hosts will be configured with a nginx web server and the remaining host will be configured as a nginx load balancer. The 2 web hosts will also have PHP and SQLite installed. The PHP application will connect directly to the backed database which will provide the message string "helloworld". 
 
 
 License
