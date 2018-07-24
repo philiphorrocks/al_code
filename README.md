@@ -13,7 +13,7 @@ This playbook configures the following:
         - Install SQLite DB and schema (Used by PHP application to display helloworld message)
 
 Requirements
-------------
+-------------
 
 This playbook requires the follwoing packages to be installed:
 
