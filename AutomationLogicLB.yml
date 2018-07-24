@@ -1,4 +1,4 @@
-- name: setup LB and configuration
+- name: setup LB configuration
   hosts: all 
   gather_facts: False
   become: yes

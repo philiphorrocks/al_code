@@ -30,6 +30,7 @@ To use this playbook, following the steps below:
 Clone files form Git repository and run vagrant command below
 
        - git clone https://github.com/philiphorrocks/al_code.git
+       - cd al_code
        - vagrant up --provision 
        - http://192.168.56.103/al/helloworld.php (This is the LB address for testing)
 

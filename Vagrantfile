@@ -37,6 +37,6 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "AutomationLogicLB.yml"
 
     end
-    end 
+   end 
 end
 
