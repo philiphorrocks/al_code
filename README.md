@@ -11,6 +11,7 @@ This playbook configures the following:
         - Update sudo rules for vagrant user and admin group
         - Configure Load blancer (http://192.168.56.103/al/helloworld.php)  round robin between 2 web hosts 
         - Install SQLite DB and schema (Used by PHP application to display helloworld message)
+        - Test the all URLs for correct content
 
 Requirements
 -------------
@@ -48,6 +49,20 @@ Testing:
 --------
 
 To test the application, hit the LB URL http://192.168.56.103/al/helloworld.php. You should see the server IP change as the LB round robins the requests to the backed web servers. You should also see the conenction the backend SQLite DB which will display the "helloworld" message.  
+
+I also test all web pages for content to valid and confirm they are running
+
+ name: ensure web page is available 
+  uri:
+    url: http://localhost:80/al/helloworld.php
+    return_content: yes
+  register: page_test 
+
+- name: ensure content is present on the page 
+  assert:
+    that:
+      - "'Database message' in page_test.content"
+
 
 
 License

@@ -1,0 +1,13 @@
+---
+# tasks file for test
+
+- name: ensure web page is available 
+  uri:
+    url: http://localhost:80/al/helloworld.php
+    return_content: yes
+  register: page_test 
+
+- name: ensure content is present on the page 
+  assert:
+    that:
+      - "'Database message' in page_test.content"
