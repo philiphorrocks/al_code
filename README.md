@@ -50,9 +50,9 @@ Testing:
 
 To test the application, hit the LB URL http://192.168.56.103/al/helloworld.php. You should see the server IP change as the LB round robins the requests to the backed web servers. You should also see the conenction the backend SQLite DB which will display the "helloworld" message.  
 
-I also test all web pages for content to valid and confirm they are running
+I test all web pages for content to validate and confirm they are running
 
- name: ensure web page is available 
+- name: ensure web page is available 
   uri:
     url: http://localhost:80/al/helloworld.php
     return_content: yes
